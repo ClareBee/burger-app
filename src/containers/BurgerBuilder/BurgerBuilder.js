@@ -12,3 +12,5 @@ class BurgerBuilder extends React.Component {
     );
   }
 }
+
+export default BurgerBuilder;
