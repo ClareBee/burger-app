@@ -16,3 +16,7 @@
 .ToolBar nav {
   height: 100%;
 }
+/* css modules converts this into a different class from the other Logo  */
+.Logo {
+  height: 80%;
+}
