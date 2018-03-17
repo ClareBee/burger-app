@@ -13,10 +13,17 @@ class Layout extends React.Component {
       showSideDrawer: false
     })
   }
+
+  //use prevState as the clean way to set state when it depends on the old state
+  sideDrawerToggleHandler = () => {
+    this.setState((prevState) => {
+      return {showSideDrawer: !prevState.showSideDrawer}
+    });
+  }
   render(){
     return(
       <Aux>
-        <ToolBar />
+        <ToolBar drawerToggleClick={this.sideDrawerToggleHandler}/>
         <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}/>
         <main className={classes.Content}>
         {/* renders the component we wrap with this layout */}
