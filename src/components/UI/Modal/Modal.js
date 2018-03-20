@@ -7,7 +7,7 @@ class Modal extends React.Component {
 
   //check if shown - only rerender it if it can be seen!
   shouldComponentUpdate(nextProps, nextState){
-    return nextProps.show !== this.props.show;
+    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
   }
 
   render (){
