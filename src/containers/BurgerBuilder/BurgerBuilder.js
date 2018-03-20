@@ -5,6 +5,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 // GLOBAL CONSTANTS IN CAPITALS
 const INGREDIENT_PRICES = {
@@ -92,7 +93,24 @@ class BurgerBuilder extends React.Component {
   }
 
   purchaseContinueHandler = () => {
-    console.log('you continue')
+    const order = {
+      ingredients: this.state.ingredients,
+      //price should be on server side to prevent manipulation!
+      price: this.state.totalPrice,
+      customer: {
+        name: "Clare Bee",
+        address: {
+          street: '21 Jump Street',
+          zipCode: '12345',
+          country: "USA"
+        },
+        email: 'Test@Test.com'
+      },
+      deliveryMethod: 'fastest'
+    }
+    axios.post('/orders.json', order)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
   render (){
