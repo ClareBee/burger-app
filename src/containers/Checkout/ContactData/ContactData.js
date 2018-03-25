@@ -49,7 +49,7 @@ class ContactData extends React.Component {
         value: ''
       },
       deliveryMethod: {
-        elementType: 'selet',
+        elementType: 'select',
         elementConfig: {
           options: [
             {value: 'fastest', displayValue: 'Fastest'},
