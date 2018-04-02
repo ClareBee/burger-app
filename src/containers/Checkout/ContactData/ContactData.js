@@ -68,20 +68,15 @@ class ContactData extends React.Component {
     this.setState({
       loading: true
     });
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm){
+      formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
+    };
     const order = {
       ingredients: this.props.ingredients,
       //price should be on server side to prevent manipulation!
       price: this.props.price,
-      customer: {
-        name: "Clare Bee",
-        address: {
-          street: '21 Jump Street',
-          zipCode: '12345',
-          country: "USA"
-        },
-        email: 'Test@Test.com'
-      },
-      deliveryMethod: 'fastest'
+      orderData: formData,
     }
     axios.post('/orders.json', order)
       .then(response => {
@@ -97,7 +92,7 @@ class ContactData extends React.Component {
       );
   }
   inputChangedHandler = (event, inputIdentifier) => {
-    //clones - for immutable updating
+    //clones - for immutable
     const updatedOrderForm = {
       ...this.state.orderForm
     };
