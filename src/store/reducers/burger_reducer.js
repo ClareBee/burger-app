@@ -1,4 +1,4 @@
-import * as actionTypes from './actions';
+import * as actionTypes from '../actions/actionTypes.js';
 
 // GLOBAL CONSTANTS IN CAPITALS
 const INGREDIENT_PRICES = {
