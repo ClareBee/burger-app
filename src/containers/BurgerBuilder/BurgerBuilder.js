@@ -7,34 +7,23 @@ import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axios-orders';
 import * as actions from '../../store/actions/index';
+import axios from '../../axios-orders';
+
 
 class BurgerBuilder extends React.Component {
   //modern alternative to constructor
   state = {
     purchasing: false,
-    loading: false,
-    error: false
   }
   componentDidMount() {
-    // axios.get('https://react-my-burger-9d24d.firebaseio.com/orders/ingredients.json')
-    // .then(response => {
-    //   this.setState({
-    //     ingredients: response.data
-    //   });
-    // })
-    // .catch(error => {
-    //   this.setState({
-    //     error: true
-    //   })
-    // })
+    console.log(this.props);
+    this.props.onInitIngredients();
   }
 
   updatePurchaseState = (ingredients) => {
     const sum = Object.keys(ingredients)
       .map(igKey => {
-
         return ingredients[igKey];
       })
       .reduce((sum, el) => {
@@ -67,7 +56,7 @@ class BurgerBuilder extends React.Component {
         disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burger = this.state.error ? <p>Ingredients didn't load</p> : <Spinner />;
+    let burger = this.props.error ? <p>Ingredients didn't load</p> : <Spinner />;
     if(this.props.ings){
       burger = (
         <Aux>
@@ -105,13 +94,15 @@ class BurgerBuilder extends React.Component {
 const mapStateToProps = state => {
   return {
     ings: state.ingredients,
-    price: state.totalPrice
+    price: state.totalPrice,
+    error: state.error
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
-    onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName))
+    onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(actions.initIngredients())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
