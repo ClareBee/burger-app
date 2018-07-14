@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import burgerReducer from './store/reducers/burger_reducer';
 import orderReducer from './store/reducers/orders_reducer';
+import authReducer from './store/reducers/auth_reducer';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
 
@@ -14,7 +15,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerReducer,
-  orders: orderReducer
+  orders: orderReducer,
+  auth: authReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
