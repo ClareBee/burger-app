@@ -11,7 +11,7 @@ import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
 
 
-class BurgerBuilder extends React.Component {
+export class BurgerBuilder extends React.Component {
   //modern alternative to constructor
   state = {
     purchasing: false,
