@@ -106,6 +106,7 @@ class ContactData extends React.Component {
       //price should be on server side to prevent manipulation!
       price: this.props.price,
       orderData: formData,
+      userId: this.props.userId,
     }
     this.props.onOrderBurger(order, this.props.token);
   }
@@ -190,6 +191,7 @@ const mapStateToProps = state => {
     price: state.burgerBuilder.totalPrice,
     loading: state.orders.loading,
     token: state.auth.token,
+    userId: state.auth.userId,
   }
 }
 
