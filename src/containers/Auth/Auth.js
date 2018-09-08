@@ -76,7 +76,6 @@ class Auth extends Component {
     this.setState(prevState => {
       return {isSignUp: !prevState.isSignUp};
     });
-    console.log(this.state)
   }
 
   render(){
