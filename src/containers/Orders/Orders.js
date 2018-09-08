@@ -8,7 +8,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Orders extends React.Component {
   componentDidMount(){
-    console.log(this.props)
     this.props.onFetchOrders(this.props.token, this.props.userId);
   }
   render(){

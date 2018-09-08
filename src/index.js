@@ -12,7 +12,7 @@ import authReducer from './store/reducers/auth_reducer';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
 
-const composeEnhancers = composeWithDevTools({});
+const composeEnhancers = process.env.NODE_ENV === 'development' ? composeWithDevTools({}) : null;
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerReducer,
