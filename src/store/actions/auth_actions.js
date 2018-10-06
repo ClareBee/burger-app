@@ -22,12 +22,12 @@ export const authFailure = (error) => {
   };
 };
 export const logout = () => {
-  console.log('logged out');
-  localStorage.removeItem('token');
-  localStorage.removeItem('expirationDate');
-  localStorage.removeItem('userId');
+  // remove side effects into saga
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('expirationDate');
+  // localStorage.removeItem('userId');
   return {
-    type: actionTypes.LOGOUT,
+    type: actionTypes.AUTH_INITIATE_LOGOUT,
   }
 }
 export const checkAuthTimeout = (expirationTime) => {
