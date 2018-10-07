@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -45,32 +44,11 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 export const auth = (email, password, isSignUp) => {
-  return dispatch => {
-    dispatch(authStart());
-    const authData = {
-      email: email,
-      password: password,
-      returnSecureToken: true
-    };
-    let url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${process.env.REACT_APP_API}`;
-    if(!isSignUp){
-      url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${process.env.REACT_APP_API}`;
-    }
-    console.log(process.env.REACT_APP_API)
-    axios.post(url, authData)
-      .then(response => {
-        console.log(response);
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-        localStorage.setItem('token', response.data.idToken);
-        localStorage.setItem('expirationDate', expirationDate);
-        localStorage.setItem('userId', response.data.localId);
-        dispatch(checkAuthTimeout(response.data.expiresIn));
-        dispatch(authSuccess(response.data.idToken, response.data.localId));
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch(authFailure(err.response.data.error))
-      })
+  return {
+    type: actionTypes.AUTH_USER,
+    email: email,
+    password: password,
+    isSignUp: isSignUp
   }
 }
 
