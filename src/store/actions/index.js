@@ -26,6 +26,6 @@ export {
   authCheckState,
   authStart,
   authSuccess,
-  authFail,
+  authFailure,
   checkAuthTimeout
 } from './auth_actions';
